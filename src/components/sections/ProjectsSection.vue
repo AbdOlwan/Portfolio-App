@@ -73,19 +73,20 @@ onMounted(() => {
               {{ project.shortDescription }}
             </p>
 
-            <div class="tech-stack">
-              <span
-                v-for="tech in project.technologies.slice(0, 4)"
-                :key="tech.id"
-                class="tech-tag"
-                :style="{ '--tech-color': tech.color || '#64748b' }"
-              >
-                {{ tech.name }}
-              </span>
-              <span v-if="project.technologies.length > 4" class="tech-tag more">
-                +{{ project.technologies.length - 4 }}
-              </span>
-            </div>
+<div class="tech-stack">
+  <span
+    v-for="tech in (project.technologies || []).filter(t => t && t.id).slice(0, 4)"
+    :key="tech.id"
+    class="tech-tag"
+    :style="{ '--tech-color': tech.color || '#64748b' }"
+  >
+    {{ tech.name }}
+  </span>
+
+  <span v-if="project.technologies && project.technologies.filter(t => t && t.id).length > 4" class="tech-tag more">
+    +{{ project.technologies.filter(t => t && t.id).length - 4 }}
+  </span>
+</div>
           </div>
         </article>
       </div>
